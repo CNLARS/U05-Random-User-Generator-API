@@ -85,6 +85,7 @@ function fetchData(url){
         const postalCode = `${data[0].results[0].location.postcode}`;
         const profilePicture = `${data[0].results[0].picture.large}`;
 
+        
         findEmployee(fullName, email, city, state, country, postalCode, profilePicture);
 
     })
@@ -92,18 +93,24 @@ function fetchData(url){
   
 function findEmployee(nameData, emailData, cityData, stateData, countryData, postalData, pictureData){
     //Where in the World is Carmen Sandiego?
+    
+    for(let i = 0; i < card.length; i++){
+        //console.log(i);
+        
+        const employeeName = document.getElementsByClassName("card-name")[i];
+            employeeName.innerHTML = nameData;
 
-    const employeeName = document.getElementById("name");
-        employeeName.innerHTML = nameData;
+        const employeeEmail = document.getElementsByClassName("card-name")[i].nextElementSibling;
+            employeeEmail.innerHTML = emailData;
 
-    const employeeEmail = document.getElementsByClassName("card-text")[0];
-        employeeEmail.innerHTML = emailData;
+        const employeePhoto = document.getElementsByClassName("card-img")[i];
+            employeePhoto.src = pictureData;
 
-    const employeePhoto = document.getElementsByClassName("card-img")[0];
-        employeePhoto.src = pictureData;
+        const employeeLocation = document.getElementsByClassName("card-text cap")[i];
+            employeeLocation.innerHTML = `${cityData}, ${stateData}<br> ${countryData}<br>${postalData}`;
 
-    const employeeLocation = document.getElementsByClassName("card-text")[1];
-        employeeLocation.innerHTML = `${cityData}, ${stateData}<br> ${countryData}<br>${postalData}`;
+    }
+   
 
     }
 
@@ -118,9 +125,4 @@ function checkStatus(response){
   
   }
 
-  //To Be Continued:  Displaying data to each card
-
-//   for(let i = 0; i < card.length; i++){
-//     console.log(i);
-//  //findEmployee(fullName, email, city, state, country, postalCode);
-// }
+  //To Be Continued:  Displaying different employee data to each card
