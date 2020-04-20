@@ -29,7 +29,14 @@ const searchContainer = document.querySelector(".search-container");
     `;
         searchContainer.innerHTML = htmlMarkup;
 
-/*EE Code: Employees can be filtered by name.*/
+/*
+
+EE Code: Employees can be filtered by name.
+        -Create an empty array.
+        -if/else style.display "block/none"
+        -if input search val includes contact push to new array to display
+
+*/
 
     }
 //Calls the function-RELOCATION UPON REFACTORING
@@ -54,7 +61,7 @@ function galleryMode(){
         `;
 
         gallery.innerHTML += htmlMarkup;
-    
+        
     }
     
 }
@@ -94,25 +101,60 @@ function fetchData(url){
 function findEmployee(nameData, emailData, cityData, stateData, countryData, postalData, pictureData){
     //Where in the World is Carmen Sandiego?
     
-    for(let i = 0; i < card.length; i++){
-        //console.log(i);
-        
-        const employeeName = document.getElementsByClassName("card-name")[i];
-            employeeName.innerHTML = nameData;
+    // for(let i = 0; i < card.length; i++){
+            
+    //         //Functional, concise, yet identical data...
 
-        const employeeEmail = document.getElementsByClassName("card-name")[i].nextElementSibling;
-            employeeEmail.innerHTML = emailData;
+    //         card[i].innerHTML = `
+    //         <div class="card-img-container">
+    //             <img class="card-img" src="${pictureData}" alt="profile picture">
+    //         </div>
+    //         <div class="card-info-container">
+    //             <h3 id="name" class="card-name cap">${nameData}</h3>
+    //             <p class="card-text">${emailData}</p>
+    //             <p class="card-text cap">${cityData}, ${stateData}, ${countryData}, ${postalData}</p>
+    //         </div>
+       
+    //     `;
+    // }
+    console.log(Array.from(card));
+    
+        //Refactored, loops same info
+            // for(let i = 0; i < card.length; i++){
 
-        const employeePhoto = document.getElementsByClassName("card-img")[i];
-            employeePhoto.src = pictureData;
+            // const employeeName = document.getElementsByClassName("card-name")[i];
+            // const employeeEmail = document.getElementsByClassName("card-name")[i].nextElementSibling;
+            // const employeePhoto = document.getElementsByClassName("card-img")[i];
+            // const employeeLocation = document.getElementsByClassName("card-text cap")[i];
 
-        const employeeLocation = document.getElementsByClassName("card-text cap")[i];
-            employeeLocation.innerHTML = `${cityData}, ${stateData}<br> ${countryData}<br>${postalData}`;
+            // employeeName.innerHTML = nameData;
+            // employeeEmail.innerHTML = emailData;
+            // employeePhoto.src = pictureData;
+            // employeeLocation.innerHTML = `${cityData}, ${stateData}<br> ${countryData}<br>${postalData}`;
 
-    }
+
+            // }
+            
+//console.log(card);
+        };
+
+        //Original, loops same info
+        // const employeeName = document.getElementsByClassName("card-name")[i];
+        //     employeeName.innerHTML = nameData;
+
+        // const employeeEmail = document.getElementsByClassName("card-name")[i].nextElementSibling;
+        //     employeeEmail.innerHTML = emailData;
+
+        // const employeePhoto = document.getElementsByClassName("card-img")[i];
+        //     employeePhoto.src = pictureData;
+
+        // const employeeLocation = document.getElementsByClassName("card-text cap")[i];
+        //     employeeLocation.innerHTML = `${cityData}, ${stateData}<br> ${countryData}<br>${postalData}`;
+
+    //}
    
 
-    }
+    //}
 
 
 //Sidekick Function(s):
