@@ -16,7 +16,7 @@ const searchContainer = document.querySelector(".search-container");
     `;
         searchContainer.innerHTML = htmlMarkup;
         
-        //Employees are searchable by any information in their contact card
+        //Employees are searchable by any information inside contact card:
             document.querySelector(".search-container input").addEventListener("keyup", (e) => {
                 //console.log(e.target.value);
                 const searchMatch = [];
@@ -26,34 +26,31 @@ const searchContainer = document.querySelector(".search-container");
                         card[i].style.display = "none";
 
                     if( contactInfo.includes(e.target.value) ){
-                        //Search value includes contact push to new array to display
+                        //Search value includes contacts to push to new array for display:
                         searchMatch.push(contactInfo);
                         card[i].style.display = "inherit";
-                        //console.log();
+                        //console.log(); Testing123?
                     } else {
-                        console.log("Who?");
-                        //Refactor to add message to user.
+                        //console.log("Who?"); //Testing123, understanding functionality  
+                    //Meta Error Message:
+                        const secretTelegraph = `<p>Where in the world is Carmen Sandiego?</p>`;
+                        gallery.innerHTML = secretTelegraph;
                     }
 
-
                 }
-                
 
             });
 
-/*
-EE Code: Employees can be filtered by all .
-*/
-
     }
+
 //Calls the function-RELOCATION UPON REFACTORING
 searchBar();  //Testing123
 
 
-//Appending Gallery to `gallery` div:
+//Appending Gallery of contact cards to `gallery` div:
 function galleryMode(){
 
-    //++EE: Updated CSS
+    //++EE: Updated CSS [Honeybee Employee Theme]
         document.body.style.backgroundColor = "gold";
         document.querySelector("div").style.backgroundColor = "goldenrod";
         document.querySelector("div").style.textShadow = "2px 3px 4px floralwhite";
@@ -61,7 +58,7 @@ function galleryMode(){
 //Create 12 "Awesome Inc." employee cards with HTML markup
     for(let i = 0; i < 12; i++){
         const htmlMarkup = `
-            <div class="card"></div>
+        <div class="card">💡🐝💡🐝💡🐝💡🐝💡🐝💡🐝💡🐝</div>
         `;
     
         gallery.innerHTML += htmlMarkup;
@@ -81,9 +78,8 @@ function fetchData(url){
       .then(data => {
         console.log(data.results); //Reference to compare data
         
-            for(let i = 0; i < card.length; i++){
-                console.log(i); //Testing123 
-                //Success Test: console.log(`${data.results[i].name.first} ${data.results[i].name.last}`);
+            for(let i = 0; i < card.length; i++){ 
+            //OG Success Test: console.log(`${data.results[i].name.first} ${data.results[i].name.last}`);
             
             const fullName = `${data.results[i].name.first} ${data.results[i].name.last}`;
             const email = `${data.results[i].email}`;
@@ -93,23 +89,25 @@ function fetchData(url){
             const postalCode = `${data.results[i].location.postcode}`;
             const profilePicture = `${data.results[i].picture.large}`;
 
-       //Where in the World is Carmen Sandiego?
+            //Where in the World is Carmen Sandiego?
                 card[i].innerHTML = `
                     <div class="card-img-container">
                     <img class="card-img" src="${profilePicture}" alt="profile picture">
+                    💡<br>
+                    🐝<br>
                     </div>
                     <div class="card-info-container">
-                    <h3 id="name" class="card-name cap">${fullName}</h3>
+                    <h3 id="name" class="card-name cap">${fullName} 🌻</h3>
                     <p class="card-text">${email}</p>
                     <p class="card-text cap">${city}, ${state}<br> ${country}<br>${postalCode}</p>
                     </div>`
         
-             console.log(fullName);
+             console.log(fullName); //Testing123 Visibility
 
             }
         
         })
-      .catch(error => console.log(`${error.statusText} occurred: Looks like "${error}" 
+      .catch(error => console.log(`Error occurred: Looks like "${error}" 
         is causing a problem fetching the requested information from ${url} at this time.`) )
   
   }
@@ -119,7 +117,7 @@ function fetchData(url){
   ])
   
     .then(data => {
-
+        //Study up on .then() after Promise.all()!
              
     })
 
@@ -134,10 +132,10 @@ function checkStatus(response){
   }
 
 /*
-  To Be Continued:  
-  Then adding event listener to each card to view individual contact information.
+  To Code List:  
+  Adding event listener to each card to view additional contact information on individual employee.
 
   ++EE: 
-  Create a functional Search Bar.
-  Navigational elements.
+  Navigational elements for Modal Window
+
  */
