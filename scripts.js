@@ -30,17 +30,14 @@ const searchContainer = document.querySelector(".search-container");
                         searchMatch.push(contactInfo);
                         card[i].style.display = "inherit";
                         }
+                }    
 
-                        //Meta Error Message:
-                     if(searchMatch.length === 0){
-                        //console.log("Where's Waldo?"); Testing123
-                        const secretTelegraph = `
-                        <h2>Where in the world is Carmen Sandiego?<br>🌎 💃🏾 🔍<br></h2>
-                        `;
-                        gallery.innerHTML = secretTelegraph;
-                    } //Does not update when backspace/delete input!
-                    
-                }                 
+                  //Meta Error Message:
+                  if(searchMatch.length === 0){
+                    const secretTelegraph = 
+                        "Where in the world is Carmen Sandiego? 🌎 💃🏾 🔍";
+                    window.alert(secretTelegraph);
+                }            
                     
             });
 
@@ -100,27 +97,34 @@ function fetchData(url){
             const month = new Date(birthday).getMonth() + 1;
             const date = new Date(birthday).getDate();
             
-            
+            cardHTML = `
+            <div class="card-img-container">
+            💡<br>
+            <img class="card-img" src="${profilePicture}" alt="profile picture">
+            </div>
+            <div class="card-info-container">
+            <h3 id="name" class="card-name cap">${fullName} 🐝</h3>
+            <p class="card-text"><strong>${email}</strong></p>
+            <p class="card-text cap">${city}, ${country}<br> GMT: ${timeZone}</p>
+            </div>`;
 
             //Where in the World is Carmen Sandiego?
-                card[i].innerHTML = `
-                    <div class="card-img-container">
-                    <img class="card-img" src="${profilePicture}" alt="profile picture">
-                    <br>💡<br>🐝
-                    </div>
-                    <div class="card-info-container">
-                    <h3 id="name" class="card-name cap">${fullName} 🌻</h3>
-                    <p class="card-text"><strong>${email}</strong></p>
-                    <p class="card-text cap">${city}, ${country}<br><br> GMT: ${timeZone}</p>
-                    </div>`
+                card[i].innerHTML = cardHTML;
         
              console.log(fullName); //Testing123 Visibility
             
+             
+             
              //Sets event listener to all cards:
-             card[i].addEventListener("click", (e) => {
+             Array.from(card)[i].addEventListener("click", () => {
                 console.log("bzzz"); //Testing123
+                // if(e.target = card[i]){
+                //     Array.from(card).map(card => {
+                //         console.log(card);
+                //     });//map
+                
 
-                document.body.innerHTML = `
+                const employeeInfo =`
                 <div class="modal-container">
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
@@ -140,20 +144,38 @@ function fetchData(url){
                         <button type="button" id="modal-next" class="modal-next btn">Next</button>
                     </div>
                 </div>
-                `
-                //console.log(document.body.innerHTML); //Testing123 Still needs ++EE Criteria
+                `;
+                //Displays over card[i] gallery
+                document.body.innerHTML += employeeInfo;
+                //console.log(employeeInfo);
+                
+                
+// Still coding ++EE Criteria:
+                
+                document.querySelector(".modal-close-btn").addEventListener("click", (e) => {
+                    console.log("Phase 1 Functional!");
+                    //Cards don't update when clicked:
+                    document.querySelector(".modal-container").remove();
+                    
+                    });
 
-                //add event listener and if conditional 
-                //with i + 1 for right and i - 1 for left and modal-close-btn!
-                document.getElementsByClassName("modal-container").addEventListener("click", (e) => {
-                    console.log("Where's Waldo?");
-                });
+ //Still coding ++EE Prev/Next BTN:
+                document.querySelector("#modal-prev").addEventListener("click", () => {
+                    console.log("Phase 1 Functional!");
+                    console.log( document.querySelector(".card")[i - 1] );
+                    });
 
-            });
+                document.querySelector("#modal-next").addEventListener("click", () => {
+                    console.log("Phase 1 Functional!");
+                    console.log( document.querySelector(".card")[i + 1] );
+                    });
+// }//if
+            }); //Event
 
-            }
-   
-        })
+
+            }//For
+            
+        })//then
         
 
       .catch(error => 
