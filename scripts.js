@@ -147,27 +147,29 @@ function fetchData(url){
                 `;
                 //Displays over card[i] gallery
                 document.body.innerHTML += employeeInfo;
-                //console.log(employeeInfo);
+                //console.log(document.querySelector(".modal-container"));
                 
                 
 // Still coding ++EE Criteria:
                 
                 document.querySelector(".modal-close-btn").addEventListener("click", (e) => {
                     console.log("Phase 1 Functional!");
-                    //Cards don't update when clicked:
-                    document.querySelector(".modal-container").remove();
+                    //Cards don't update after clicked
+                    // .hidden or .remove()?
+                    document.querySelector(".modal-container").hidden = true;
+
                     
                     });
 
  //Still coding ++EE Prev/Next BTN:
                 document.querySelector("#modal-prev").addEventListener("click", () => {
                     console.log("Phase 1 Functional!");
-                    console.log( document.querySelector(".card")[i - 1] );
+                    console.log( document.querySelectorAll(".card")[i].previousElementSibling );
                     });
 
                 document.querySelector("#modal-next").addEventListener("click", () => {
                     console.log("Phase 1 Functional!");
-                    console.log( document.querySelector(".card")[i + 1] );
+                    console.log( document.querySelectorAll(".card")[i].nextElementSibling );
                     });
 // }//if
             }); //Event
