@@ -67,8 +67,9 @@ function galleryMode(){
         `;
     
         gallery.innerHTML += htmlMarkup;
+
+    //++EE Updated CSS:
         card[i].style.backgroundColor = "darkseagreen";
-        
         card[i].style.border = "1px solid seagreen"
 
     }
@@ -106,55 +107,58 @@ function fetchData(url){
             const year = new Date(birthday).getFullYear();
             const month = new Date(birthday).getMonth() + 1;
             const date = new Date(birthday).getDate();
-            
-            let cardHTML = `
-            <div class="card-img-container">
-            💡<br>
-            <img class="card-img" src="${profilePicture}" alt="profile picture">
-            </div>
-            <div class="card-info-container">
-            <h3 id="name" class="card-name cap">${fullName}</h3>
-            <p class="card-text"><strong>${email}</strong></p>
-            <p class="card-text cap">${city}, ${country}<br> GMT: ${timeZone}</p>
-            </div>`;
+                
+                let cardHTML = `
+                <div class="card-img-container">
+                💡<br>
+                <img class="card-img" src="${profilePicture}" alt="profile picture">
+                </div>
+                <div class="card-info-container">
+                <h3 id="name" class="card-name cap">${fullName}</h3>
+                <p class="card-text"><strong>${email}</strong></p>
+                <p class="card-text cap">${city}, ${country}<br> GMT: ${timeZone}</p>
+                </div>`;
 
-            let employeeInfo =`
-                
-                <div class="modal">
-                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-                    <div class="modal-info-container">
-                        <img class="modal-img" src="${profilePicture}" alt="profile picture">
-                        <h3 id="name" class="modal-name cap">${fullName}</h3>
-                        <p class="modal-text">${email}</p>
-                        <p class="modal-text cap">📍 ${city}</p>
-                        <hr>
-                        <p class="modal-text">☎️: ${phoneNum}</p>
-                        <p class="modal-text">📬 ${addressNum} ${streetName}<br>${city}, ${state}<br>${country}<br>${postalCode}</p>
-                        <p class="modal-text">🎁 Birthday: ${month}/${date}/${year}</p>
-                    </div>
-                
-                    <div class="modal-btn-container">
-                        <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-                        <button type="button" id="modal-next" class="modal-next btn">Next</button>
-                    </div>
-                
-                `;
+                let employeeInfo =`
+                    
+                    <div class="modal">
+                        <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+                        <div class="modal-info-container">
+                            <img class="modal-img" src="${profilePicture}" alt="profile picture">
+                            <h3 id="name" class="modal-name cap">${fullName}</h3>
+                            <p class="modal-text">${email}</p>
+                            <p class="modal-text cap">📍 ${city}</p>
+                            <hr>
+                            <p class="modal-text">☎️: ${phoneNum}</p>
+                            <p class="modal-text">📬 ${addressNum} ${streetName}<br>${city}, ${state}<br>${country}<br>${postalCode}</p>
+                            <p class="modal-text">🎁 Birthday: ${month}/${date}/${year}</p>
+                        </div>
+                    
+                        <div class="modal-btn-container">
+                            <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+                            <button type="button" id="modal-next" class="modal-next btn">Next</button>
+                        </div>
+                    
+                    `;
 
                 card[i].innerHTML = cardHTML;
+                    //++EE Updated CSS added after `card` has HTML to style:
                     document.getElementsByClassName("card-img")[i].style.border = "1px solid seagreen";
                 
+                //Creates an array to cycle with PREV/NEXT btn
                 people.push(data.results[i])
                 
-                console.log(fullName);
+                //console.log(fullName);
         
              //Sets event listener to all cards:
              Array.from(card)[i].addEventListener("click", () => {
                 let modalText = document.getElementsByClassName("modal-text");
                 console.log("💡"); //Testing123
                
-                    modalDiv.innerHTML = employeeInfo;
+                    modalDiv.innerHTML = employeeInfo; //innerHTML with initial data
                     modalDiv.style.display = "block";
 
+                    //++EE Updated CSS:
                     document.getElementsByClassName("modal")[0].style.color = "seagreen";
 
                     modalText[0].style.color = "black";
@@ -164,7 +168,7 @@ function fetchData(url){
                     modalText[4].style.color = "mediumseagreen";
 
                     document.getElementsByClassName("modal-img")[0].style.border = "1px solid black"
-                    //document.getElementsByClassName("modal-btn-container")[0].style.border = ".05 px solid black"
+
                     
                 
                 //Closes Modal Window by emptying innerHTML and sets display to none
@@ -178,7 +182,7 @@ function fetchData(url){
  //++EE Prev/Next BTN:
                 document.querySelector("#modal-prev").addEventListener("click", () => {
                    
-                    console.log("Phase 4 Debugging!");
+                    console.log("Phase 5 Future Refactor!");
                     console.log(`${people[i -= 1].name.first}`);
 
                     let prevProfilePicture = document.getElementsByClassName("modal-img")[0];
@@ -218,7 +222,7 @@ function fetchData(url){
 
                 document.querySelector("#modal-next").addEventListener("click", () => {
 
-                    console.log("Phase 4 Debugging!");
+                    console.log("Phase 5 Future Refactor!");
                     console.log(`${people[i += 1].name.first}`);
                     
                     let nextProfilePicture = document.getElementsByClassName("modal-img")[0];
@@ -299,9 +303,11 @@ function checkStatus(response){
 
 
 /*
-  To Code List:  
-            Mystery: Why only functional at 100% with lines 181, 182, 221, and 222?
-            Commented out causes error.
+  To Code List: 
+            Mystery:
+                Why only functional at 100% with lines 181, 182, 221, and 222?
+                    Commented out results in error.
 
-            Tidy code comments.
+            Future Refactor: 
+                @ End of cycle, disappearing PREV/NEXT btn.
  */
