@@ -3,8 +3,9 @@
 
 
 CSS:
-    -Tri Tone Background Color Body/Search DIV
-    -Text Shadow adds contrast
+    -Background color body/search DIV "mediumseagreen"
+    -Card color "darkseagreen"
+    -Text Shadow "floralwhite" adds contrast to header
     -Emojis
     -Modal Window Emoji Key
 

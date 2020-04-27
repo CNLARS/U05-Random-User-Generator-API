@@ -52,8 +52,8 @@ function galleryMode(){
 
     //++EE: Updated CSS:
         document.body.style.backgroundColor = "mediumseagreen";
-        document.querySelector("div").style.backgroundColor = "seagreen";
-        document.querySelector("div").style.textShadow = "2px 3px 4px floralwhite";
+        document.querySelector("div").style.backgroundColor = "mediumseagreen";
+        document.querySelector("div").style.textShadow = "1px 2px 3px floralwhite";
 
         //For Modal Window:
             modalDiv.className = "modal-container";
@@ -69,7 +69,7 @@ function galleryMode(){
         gallery.innerHTML += htmlMarkup;
         card[i].style.backgroundColor = "darkseagreen";
         
-        card[i].style.border = "2px solid seagreen"
+        card[i].style.border = "1px solid seagreen"
 
     }
     
@@ -141,7 +141,7 @@ function fetchData(url){
                 `;
 
                 card[i].innerHTML = cardHTML;
-                document.getElementsByClassName("card-img")[i].style.border = "2px solid seagreen";
+                    document.getElementsByClassName("card-img")[i].style.border = "1px solid seagreen";
                 
                 people.push(data.results[i])
                 
@@ -149,19 +149,22 @@ function fetchData(url){
         
              //Sets event listener to all cards:
              Array.from(card)[i].addEventListener("click", () => {
+                let modalText = document.getElementsByClassName("modal-text");
                 console.log("💡"); //Testing123
                
                     modalDiv.innerHTML = employeeInfo;
                     modalDiv.style.display = "block";
-                    document.getElementsByClassName("modal")[0].style.color = "seagreen";
-                    document.getElementsByClassName("modal-text")[0].style.color = "black";
-                    document.getElementsByClassName("modal-text")[1].style.color = "seagreen";
-                    document.getElementsByClassName("modal-text")[2].style.color = "seagreen";
-                    document.getElementsByClassName("modal-text")[3].style.color = "black";
-                    document.getElementsByClassName("modal-text")[4].style.color = "seagreen";
 
-                    document.getElementsByClassName("modal-img")[0].style.border = "2px solid black"
-                    document.getElementsByClassName("modal-btn-container")[0].style.border = "1px solid black"
+                    document.getElementsByClassName("modal")[0].style.color = "seagreen";
+
+                    modalText[0].style.color = "black";
+                    modalText[1].style.color = "lightseagreen";
+                    modalText[2].style.color = "black";
+                    modalText[3].style.color = "black";
+                    modalText[4].style.color = "mediumseagreen";
+
+                    document.getElementsByClassName("modal-img")[0].style.border = "1px solid black"
+                    //document.getElementsByClassName("modal-btn-container")[0].style.border = ".05 px solid black"
                     
                 
                 //Closes Modal Window by emptying innerHTML and sets display to none
@@ -174,7 +177,7 @@ function fetchData(url){
 
  //++EE Prev/Next BTN:
                 document.querySelector("#modal-prev").addEventListener("click", () => {
-                    
+                   
                     console.log("Phase 4 Debugging!");
                     console.log(`${people[i -= 1].name.first}`);
 
@@ -184,16 +187,16 @@ function fetchData(url){
                     let prevFullName = document.getElementsByClassName("modal-name cap")[0];
                             prevFullName.innerText = `${people[i - 1].name.first} ${people[i - 1].name.last}`;
 
-                    let prevEmail = document.getElementsByClassName("modal-text")[0];
+                    let prevEmail = modalText[0];
                             prevEmail.innerText = `${people[i - 1].email}`;
 
-                    let prevCity = document.getElementsByClassName("modal-text")[1];
+                    let prevCity = modalText[1];
                             prevCity.innerText = `📍${people[i - 1].location.city}`;
 
-                    let prevPhone = document.getElementsByClassName("modal-text")[2];
+                    let prevPhone = modalText[2];
                             prevPhone.innerText = `☎️: ${people[i - 1].phone}`;
 
-                    let prevAddress = document.getElementsByClassName("modal-text")[3];
+                    let prevAddress = modalText[3];
                             prevAddress.innerText = 
                         `📬 ${people[i - 1].location.street.number} ${people[i - 1].location.street.name}
                             ${people[i - 1].location.city}, ${people[i - 1].location.state}
@@ -201,7 +204,7 @@ function fetchData(url){
                             ${people[i - 1].location.postcode}`;
                             
                     
-                    let prevBirthday = document.getElementsByClassName("modal-text")[4];
+                    let prevBirthday = modalText[4];
                             let prevDOB = `${people[i - 1].dob.date}`;
                             
                             let prevYear = new Date(prevDOB).getFullYear();
@@ -225,16 +228,16 @@ function fetchData(url){
                             nextFullName.innerText = `${people[i + 1].name.first} ${people[i + 1].name.last}`;
                             //console.log(nextFullName);
 
-                    let nextEmail = document.getElementsByClassName("modal-text")[0];
+                    let nextEmail = modalText[0];
                             nextEmail.innerText = `${people[i + 1].email}`;
 
-                    let nextCity = document.getElementsByClassName("modal-text")[1];
+                    let nextCity = modalText[1];
                             nextCity.innerText = `📍${people[i + 1].location.city}`;
 
-                    let nextPhone = document.getElementsByClassName("modal-text")[2];
+                    let nextPhone = modalText[2];
                             nextPhone.innerText = `☎️: ${people[i + 1].phone}`;
 
-                    let nextAddress = document.getElementsByClassName("modal-text")[3];
+                    let nextAddress = modalText[3];
                             nextAddress.innerText = 
                         `📬 ${people[i + 1].location.street.number} ${people[i + 1].location.street.name}
                             ${people[i + 1].location.city}, ${people[i + 1].location.state}
@@ -242,7 +245,7 @@ function fetchData(url){
                             ${people[i + 1].location.postcode}`;
                             
                     
-                    let nextBirthday = document.getElementsByClassName("modal-text")[4];
+                    let nextBirthday = modalText[4];
                             let nextDOB = `${people[i + 1].dob.date}`;
                             
                             let nextYear = new Date(nextDOB).getFullYear();
@@ -250,10 +253,9 @@ function fetchData(url){
                             let nextDate = new Date(nextDOB).getDate();
 
                             nextBirthday.innerText = `🎁 Birthday: ${nextMonth}/${nextDate}/${nextYear}`;
-  
 
                     });
-// }//if
+
             }); //Event
 
 
@@ -298,10 +300,8 @@ function checkStatus(response){
 
 /*
   To Code List:  
-  Switching contact card on individual employee when "click" event occurs on navigation.
-  Add a reverse for loop
-  Refactor prevFullName to funciton
+            Mystery: Why only functional at 100% with lines 181, 182, 221, and 222?
+            Commented out causes error.
 
-  ++EE: 
-  Navigational event listeners.
+            Tidy code comments.
  */
