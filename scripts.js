@@ -4,6 +4,9 @@ const form = document.createElement("form");
 const gallery = document.getElementById("gallery");
 const card = document.getElementsByClassName("card");
 const searchContainer = document.querySelector(".search-container");
+const modalDiv = document.createElement('div');
+
+const people = [];
 
 //++EE, Appending a Search Bar to `search-container` div:
     function searchBar(){
@@ -47,19 +50,24 @@ const searchContainer = document.querySelector(".search-container");
 //Appending Gallery of contact cards to `gallery` div:
 function galleryMode(){
 
-    //++EE: Updated CSS [Honeybee Employee Theme]
-        document.body.style.backgroundColor = "gold";
-        document.querySelector("div").style.backgroundColor = "goldenrod";
+    //++EE: Updated CSS:
+        document.body.style.backgroundColor = "mediumseagreen";
+        document.querySelector("div").style.backgroundColor = "seagreen";
         document.querySelector("div").style.textShadow = "2px 3px 4px floralwhite";
+
+        //For Modal Window:
+            modalDiv.className = "modal-container";
+            document.body.appendChild(modalDiv);
+            modalDiv.style.display = "none";
 
 //Create 12 "Awesome Inc." employee cards with HTML markup
     for(let i = 0; i < 12; i++){
         const htmlMarkup = `
-        <div class="card">💡🐝💡🐝💡🐝💡🐝💡🐝💡🐝💡🐝</div>
+        <div class="card">💡🌎💡🌎💡🌎💡🌎💡🌎💡🌎💡🌎💡</div>
         `;
     
         gallery.innerHTML += htmlMarkup;
-        card[i].style.backgroundColor = "goldenrod";
+        card[i].style.backgroundColor = "darkseagreen";
 
     }
     
@@ -72,7 +80,7 @@ function fetchData(url){
       .then(checkStatus)
       .then(res => res.json() )
       .then(data => {
-        console.log(data.results); //Reference to compare data
+        //console.log(data.results); //Reference to compare data
         
             for(let i = 0; i < card.length; i++){ 
             //OG Success Test: console.log(`${data.results[i].name.first} ${data.results[i].name.last}`);
@@ -97,44 +105,28 @@ function fetchData(url){
             const month = new Date(birthday).getMonth() + 1;
             const date = new Date(birthday).getDate();
             
-            cardHTML = `
+            let cardHTML = `
             <div class="card-img-container">
             💡<br>
             <img class="card-img" src="${profilePicture}" alt="profile picture">
             </div>
             <div class="card-info-container">
-            <h3 id="name" class="card-name cap">${fullName} 🐝</h3>
+            <h3 id="name" class="card-name cap">${fullName}</h3>
             <p class="card-text"><strong>${email}</strong></p>
             <p class="card-text cap">${city}, ${country}<br> GMT: ${timeZone}</p>
             </div>`;
 
-            //Where in the World is Carmen Sandiego?
-                card[i].innerHTML = cardHTML;
-        
-             console.log(fullName); //Testing123 Visibility
-            
-             
-             
-             //Sets event listener to all cards:
-             Array.from(card)[i].addEventListener("click", () => {
-                console.log("bzzz"); //Testing123
-                // if(e.target = card[i]){
-                //     Array.from(card).map(card => {
-                //         console.log(card);
-                //     });//map
+            let employeeInfo =`
                 
-
-                const employeeInfo =`
-                <div class="modal-container">
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                     <div class="modal-info-container">
                         <img class="modal-img" src="${profilePicture}" alt="profile picture">
                         <h3 id="name" class="modal-name cap">${fullName}</h3>
-                        <p class="modal-text">📧 ${email}</p>
+                        <p class="modal-text">${email}</p>
                         <p class="modal-text cap">📍 ${city}</p>
                         <hr>
-                        <p class="modal-text">☎️ ${phoneNum}</p>
+                        <p class="modal-text">☎️: ${phoneNum}</p>
                         <p class="modal-text">📬 ${addressNum} ${streetName}<br>${city}, ${state}<br>${country}<br>${postalCode}</p>
                         <p class="modal-text">🎁 Birthday: ${month}/${date}/${year}</p>
                     </div>
@@ -143,33 +135,107 @@ function fetchData(url){
                         <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
                         <button type="button" id="modal-next" class="modal-next btn">Next</button>
                     </div>
-                </div>
+                
                 `;
-                //Displays over card[i] gallery
-                document.body.innerHTML += employeeInfo;
-                //console.log(document.querySelector(".modal-container"));
-                
-                
-// Still coding ++EE Criteria:
-                
-                document.querySelector(".modal-close-btn").addEventListener("click", (e) => {
-                    console.log("Phase 1 Functional!");
-                    //Cards don't update after clicked
-                    // .hidden or .remove()?
-                    document.querySelector(".modal-container").hidden = true;
 
+                card[i].innerHTML = cardHTML;
+                people.push(data.results[i])
+                
+                console.log(fullName);
+        
+             //Sets event listener to all cards:
+             Array.from(card)[i].addEventListener("click", () => {
+                console.log("💡"); //Testing123
+               
+                    modalDiv.innerHTML = employeeInfo;
+                    modalDiv.style.display = "block";
+                
+                //Closes Modal Window by emptying innerHTML and sets display to none
+                document.querySelector(".modal-close-btn").addEventListener("click", (e) => {
+
+                    modalDiv.innerHTML = "";
+                    modalDiv.style.display = "none";
                     
                     });
 
  //Still coding ++EE Prev/Next BTN:
                 document.querySelector("#modal-prev").addEventListener("click", () => {
-                    console.log("Phase 1 Functional!");
-                    console.log( document.querySelectorAll(".card")[i].previousElementSibling );
+                    
+                    console.log("Phase 4 Debugging!");
+
+                    let prevProfilePicture = document.getElementsByClassName("modal-img")[0];
+                            prevProfilePicture.src = `${people[i - 1].picture.large}`;
+
+                    let prevFullName = document.getElementsByClassName("modal-name cap")[0];
+                            prevFullName.innerText = `${people[i - 1].name.first} ${people[i - 1].name.last}`;
+
+                    let prevEmail = document.getElementsByClassName("modal-text")[0];
+                            prevEmail.innerText = `${people[i - 1].email}`;
+
+                    let prevCity = document.getElementsByClassName("modal-text")[1];
+                            prevCity.innerText = `📍${people[i - 1].location.city}`;
+
+                    let prevPhone = document.getElementsByClassName("modal-text")[2];
+                            prevPhone.innerText = `☎️: ${people[i - 1].phone}`;
+
+                    let prevAddress = document.getElementsByClassName("modal-text")[3];
+                            prevAddress.innerText = 
+                        `📬 ${people[i - 1].location.street.number} ${people[i - 1].location.street.name}
+                            ${people[i - 1].location.city}, ${people[i - 1].location.state}
+                            ${people[i - 1].location.country}
+                            ${people[i - 1].location.postcode}`;
+                            
+                    
+                    let prevBirthday = document.getElementsByClassName("modal-text")[4];
+                            let prevDOB = `${people[i - 1].dob.date}`;
+                            
+                            let prevYear = new Date(prevDOB).getFullYear();
+                            let prevMonth = new Date(prevDOB).getMonth() + 1;
+                            let prevDate = new Date(prevDOB).getDate();
+
+                            prevBirthday.innerText = `🎁 Birthday: ${prevMonth}/${prevDate}/${prevYear}`;
+                
+                    
                     });
 
                 document.querySelector("#modal-next").addEventListener("click", () => {
-                    console.log("Phase 1 Functional!");
-                    console.log( document.querySelectorAll(".card")[i].nextElementSibling );
+
+                    console.log("Phase 4 Debugging!");
+console.log(`${people[i += 1].name.first}`);
+                    let nextProfilePicture = document.getElementsByClassName("modal-img")[0];
+                            nextProfilePicture.src = `${people[i + 1].picture.large}`;
+
+                    let nextFullName = document.getElementsByClassName("modal-name cap")[0];
+                            nextFullName.innerText = `${people[i + 1].name.first} ${people[i + 1].name.last}`;
+                            //console.log(nextFullName);
+
+                    let nextEmail = document.getElementsByClassName("modal-text")[0];
+                            nextEmail.innerText = `${people[i + 1].email}`;
+
+                    let nextCity = document.getElementsByClassName("modal-text")[1];
+                            nextCity.innerText = `📍${people[i + 1].location.city}`;
+
+                    let nextPhone = document.getElementsByClassName("modal-text")[2];
+                            nextPhone.innerText = `☎️: ${people[i + 1].phone}`;
+
+                    let nextAddress = document.getElementsByClassName("modal-text")[3];
+                            nextAddress.innerText = 
+                        `📬 ${people[i + 1].location.street.number} ${people[i + 1].location.street.name}
+                            ${people[i + 1].location.city}, ${people[i + 1].location.state}
+                            ${people[i + 1].location.country}
+                            ${people[i + 1].location.postcode}`;
+                            
+                    
+                    let nextBirthday = document.getElementsByClassName("modal-text")[4];
+                            let nextDOB = `${people[i + 1].dob.date}`;
+                            
+                            let nextYear = new Date(nextDOB).getFullYear();
+                            let nextMonth = new Date(nextDOB).getMonth() + 1;
+                            let nextDate = new Date(nextDOB).getDate();
+
+                            nextBirthday.innerText = `🎁 Birthday: ${nextMonth}/${nextDate}/${nextYear}`;
+  
+
                     });
 // }//if
             }); //Event
@@ -217,10 +283,9 @@ function checkStatus(response){
 /*
   To Code List:  
   Switching contact card on individual employee when "click" event occurs on navigation.
-  X to close Modal Window.
+  Add a reverse for loop
+  Refactor prevFullName to funciton
 
   ++EE: 
   Navigational event listeners.
-  X to Close Window.
-
  */

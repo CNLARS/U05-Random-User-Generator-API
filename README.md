@@ -2,10 +2,10 @@
  Employee Directory
 
 
-CSS Honeybee Theme:
-    -Two Tone Background Color Body/Search DIV
+CSS:
+    -Tri Tone Background Color Body/Search DIV
     -Text Shadow adds contrast
-    -Inspirational Bee Emojis
+    -Emojis
     -Modal Window Emoji Key
 
 +Navigational Functionality:  
