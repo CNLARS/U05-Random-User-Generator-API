@@ -68,6 +68,8 @@ function galleryMode(){
     
         gallery.innerHTML += htmlMarkup;
         card[i].style.backgroundColor = "darkseagreen";
+        
+        card[i].style.border = "2px solid seagreen"
 
     }
     
@@ -139,6 +141,8 @@ function fetchData(url){
                 `;
 
                 card[i].innerHTML = cardHTML;
+                document.getElementsByClassName("card-img")[i].style.border = "2px solid seagreen";
+                
                 people.push(data.results[i])
                 
                 console.log(fullName);
@@ -149,6 +153,16 @@ function fetchData(url){
                
                     modalDiv.innerHTML = employeeInfo;
                     modalDiv.style.display = "block";
+                    document.getElementsByClassName("modal")[0].style.color = "seagreen";
+                    document.getElementsByClassName("modal-text")[0].style.color = "black";
+                    document.getElementsByClassName("modal-text")[1].style.color = "seagreen";
+                    document.getElementsByClassName("modal-text")[2].style.color = "seagreen";
+                    document.getElementsByClassName("modal-text")[3].style.color = "black";
+                    document.getElementsByClassName("modal-text")[4].style.color = "seagreen";
+
+                    document.getElementsByClassName("modal-img")[0].style.border = "2px solid black"
+                    document.getElementsByClassName("modal-btn-container")[0].style.border = "1px solid black"
+                    
                 
                 //Closes Modal Window by emptying innerHTML and sets display to none
                 document.querySelector(".modal-close-btn").addEventListener("click", (e) => {
@@ -158,10 +172,11 @@ function fetchData(url){
                     
                     });
 
- //Still coding ++EE Prev/Next BTN:
+ //++EE Prev/Next BTN:
                 document.querySelector("#modal-prev").addEventListener("click", () => {
                     
                     console.log("Phase 4 Debugging!");
+                    console.log(`${people[i -= 1].name.first}`);
 
                     let prevProfilePicture = document.getElementsByClassName("modal-img")[0];
                             prevProfilePicture.src = `${people[i - 1].picture.large}`;
@@ -201,7 +216,8 @@ function fetchData(url){
                 document.querySelector("#modal-next").addEventListener("click", () => {
 
                     console.log("Phase 4 Debugging!");
-console.log(`${people[i += 1].name.first}`);
+                    console.log(`${people[i += 1].name.first}`);
+                    
                     let nextProfilePicture = document.getElementsByClassName("modal-img")[0];
                             nextProfilePicture.src = `${people[i + 1].picture.large}`;
 
