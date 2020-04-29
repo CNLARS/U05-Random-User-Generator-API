@@ -146,7 +146,7 @@ function fetchData(url){
                     document.getElementsByClassName("card-img")[i].style.border = "1px solid seagreen";
                 
                 //Creates an array to cycle with PREV/NEXT btn
-                people.push(data.results[i])
+                people.push(data.results[i]) //Code Advised by @Emma W to create separate Array for PREV/NEXT
                 
                 //console.log(fullName);
         
@@ -167,7 +167,9 @@ function fetchData(url){
                     modalText[3].style.color = "black";
                     modalText[4].style.color = "mediumseagreen";
 
-                    document.getElementsByClassName("modal-img")[0].style.border = "1px solid black"
+                    document.getElementsByClassName("modal-img")[0].style.border = "1px solid black";
+                    document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "black";
+                    document.getElementsByClassName("modal-next btn")[0].style.backgroundColor = "black"
 
                     
                 
@@ -180,11 +182,22 @@ function fetchData(url){
                     });
 
  //++EE Prev/Next BTN:
-                document.querySelector("#modal-prev").addEventListener("click", () => {
-                   
-                    console.log("Phase 5 Future Refactor!");
-                    console.log(`${people[i -= 1].name.first}`);
+                document.querySelector("#modal-prev").addEventListener("click", (e) => {
+                                //console.log("Phase 6 Functional");
+                                console.log(`${people[i -= 1].name.first}`);
 
+                        //Toggles Disable on PREV btn:
+                        if(people[i - 2] === undefined){
+                            document.getElementsByClassName("modal-prev btn")[0].disabled = true;
+                            document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "silver";
+                        } 
+    
+                        if(e.target === document.getElementsByClassName("modal-prev btn")[0]){
+                            document.getElementsByClassName("modal-next btn")[0].disabled = false;
+                            document.getElementsByClassName("modal-next btn")[0].style.backgroundColor = "black";
+                        } 
+                    
+                    //Cycles the Array of people displayed:
                     let prevProfilePicture = document.getElementsByClassName("modal-img")[0];
                             prevProfilePicture.src = `${people[i - 1].picture.large}`;
 
@@ -220,11 +233,22 @@ function fetchData(url){
                     
                     });
 
-                document.querySelector("#modal-next").addEventListener("click", () => {
+                document.querySelector("#modal-next").addEventListener("click", (e) => {
+                                //console.log("Phase 6 Functional");
+                                console.log(`${people[i += 1].name.first}`);
 
-                    console.log("Phase 5 Future Refactor!");
-                    console.log(`${people[i += 1].name.first}`);
+                        //Toggles Disable on NEXT btn:
+                        if(people[i + 3] === undefined){
+                            document.getElementsByClassName("modal-next btn")[0].disabled = true;
+                            document.getElementsByClassName("modal-next btn")[0].style.backgroundColor = "silver";
+                        } 
+
+                        if(e.target === document.getElementsByClassName("modal-next btn")[0]){
+                            document.getElementsByClassName("modal-prev btn")[0].disabled = false;
+                            document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "black";
+                        } 
                     
+                    //Cycles the Array of people displayed:
                     let nextProfilePicture = document.getElementsByClassName("modal-img")[0];
                             nextProfilePicture.src = `${people[i + 1].picture.large}`;
 
@@ -303,11 +327,7 @@ function checkStatus(response){
 
 
 /*
-  To Code List: 
-            Mystery:
-                Why only functional at 100% with lines 181, 182, 221, and 222?
+            Riddle:
+                Why only functional at 100% with lines 187, and 238?
                     Commented out results in error.
-
-            Future Refactor: 
-                @ End of cycle, disappearing PREV/NEXT btn.
  */
