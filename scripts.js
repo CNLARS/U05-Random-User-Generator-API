@@ -238,7 +238,7 @@ function fetchData(url){
                                 console.log(`${people[i += 1].name.first}`);
 
                         //Toggles Disable on NEXT btn:
-                        if(people[i + 3] === undefined){
+                        if(people[i + 2] === undefined){
                             document.getElementsByClassName("modal-next btn")[0].disabled = true;
                             document.getElementsByClassName("modal-next btn")[0].style.backgroundColor = "silver";
                         } 
