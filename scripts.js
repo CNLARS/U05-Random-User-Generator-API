@@ -133,7 +133,6 @@ function galleryModal(employees){
                 people.push(employees); //Creates separate Array for PREV/NEXT
 
             }); //end of map
-                //console.log(employees);
             
             //employees.map(employee => console.log(employee.name.first)); //Testing123
                 
@@ -143,10 +142,16 @@ function galleryModal(employees){
         for(let i = 0; i < card.length; i ++){
             //Sets all to default display of "none"
                 document.getElementsByClassName("modal")[i].style.display = "none";
-          //Toggles Disable on PREV btn:
+          //Default Disable on PREV btn:
             if(document.getElementsByClassName("modal-prev btn")[0].style.display = "block"){
                 document.getElementsByClassName("modal-prev btn")[0].disabled = true;
                 document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "silver";
+            } 
+
+        //Default Disable on NEXT btn:
+            if(document.getElementsByClassName("modal-next btn")[11].style.display = "block"){
+                document.getElementsByClassName("modal-next btn")[11].disabled = true;
+                document.getElementsByClassName("modal-next btn")[11].style.backgroundColor = "silver";
             } 
                  //++EE Updated CSS:
                     document.getElementsByClassName("modal-img")[i].style.border = "1px solid black";
