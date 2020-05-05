@@ -136,7 +136,7 @@ function galleryMode(employees){
             });
             //console.log(employees);
             
-            employees.map(employee => console.log(employee.name.first)); //Testing123
+            //employees.map(employee => console.log(employee.name.first)); //Testing123
                 
 
         //++EE Updated CSS:
@@ -146,15 +146,17 @@ function galleryMode(employees){
 
 
         //Closes Modal Window by setting  display to none
-            document.querySelector(".modal-close-btn").addEventListener("click", (e) => {
-
-                for(let i = 0; i < card.length; i ++){
+        for(let i = 0; i < card.length; i ++){
+            //Sets all to default display of "none"
+                document.getElementsByClassName("modal")[i].style.display = "none";
+        //X btn event listener:
+            document.getElementsByClassName("modal-close-btn")[i].addEventListener("click", (e) => {
                     modalDiv.style.display = "none";
                     document.getElementsByClassName("modal")[i].style.display = "none";
-                }
+                });
                 
             
-                });
+                }
 
     //    //Creates separate Array to cycle with future PREV/NEXT btn:
     //         employees.map(employee => { 
@@ -166,12 +168,12 @@ function galleryMode(employees){
                 Array.from(card)[i].addEventListener("click", (e) => {
                     //let modalText = document.getElementsByClassName("modal-text");
                     console.log("💡"); //Testing123
-                   
+                   console.log(card[i]);
+                   console.log(document.getElementsByClassName("modal")[i]);
                         modalDiv.style.display = "block";
                         if(card[i] = e.target){
-                            console.log(i); 
-                         document.getElementsByClassName("modal")[i].style.display = "block";
-                     }
+                            document.getElementsByClassName("modal")[i].style.display = "block";
+                     } 
 
                      
                         // //++EE Updated CSS:
