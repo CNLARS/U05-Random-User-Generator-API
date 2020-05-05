@@ -5,7 +5,6 @@ const gallery = document.getElementById("gallery");
 const card = document.getElementsByClassName("card");
 const searchContainer = document.querySelector(".search-container");
 const modalDiv = document.createElement('div');
-
 const people = [];
 
 (async () => {
@@ -14,7 +13,7 @@ const people = [];
     const employees = jsonData.results;
         searchBar();
         await employeeGallery(employees);
-        await galleryMode(employees);
+        await galleryModal(employees);
         //console.log(employees);
 
           }) ();
@@ -90,7 +89,7 @@ function employeeGallery(employees){
 
 
 // //Appending Gallery of contact cards to `gallery` div:
-function galleryMode(employees){
+function galleryModal(employees){
 
     //++EE: Updated CSS:
         document.body.style.backgroundColor = "mediumseagreen";
@@ -133,135 +132,79 @@ function galleryMode(employees){
 
                 people.push(employees); //Creates separate Array for PREV/NEXT
 
-            });
-            //console.log(employees);
+            }); //end of map
+                //console.log(employees);
             
             //employees.map(employee => console.log(employee.name.first)); //Testing123
                 
 
-        //++EE Updated CSS:
-            // document.getElementsByClassName("modal-img")[0].style.border = "1px solid black";
-            // document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "black";
-            // document.getElementsByClassName("modal-next btn")[0].style.backgroundColor = "black";
-
-
-        //Closes Modal Window by setting  display to none
+       
+    //Looped Event Listeners:
         for(let i = 0; i < card.length; i ++){
             //Sets all to default display of "none"
                 document.getElementsByClassName("modal")[i].style.display = "none";
+          //Toggles Disable on PREV btn:
+            if(document.getElementsByClassName("modal-prev btn")[0].style.display = "block"){
+                document.getElementsByClassName("modal-prev btn")[0].disabled = true;
+                document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "silver";
+            } 
+                 //++EE Updated CSS:
+                    document.getElementsByClassName("modal-img")[i].style.border = "1px solid black";
+                    document.getElementsByClassName("modal-prev btn")[i].style.backgroundColor = "black";
+                    document.getElementsByClassName("modal-next btn")[i].style.backgroundColor = "black";
+                    document.getElementsByClassName("modal")[i].style.color = "seagreen";
+
+
         //X btn event listener:
             document.getElementsByClassName("modal-close-btn")[i].addEventListener("click", (e) => {
                     modalDiv.style.display = "none";
                     document.getElementsByClassName("modal")[i].style.display = "none";
                 });
                 
-            
-                }
-
-    //    //Creates separate Array to cycle with future PREV/NEXT btn:
-    //         employees.map(employee => { 
-    //             people.push(employees); 
-    //             //console.log(employees); //Testing123
-    //         }); 
-
-            for(let i = 0; i < card.length; i ++){
+            //Card event listener:
                 Array.from(card)[i].addEventListener("click", (e) => {
-                    //let modalText = document.getElementsByClassName("modal-text");
                     console.log("💡"); //Testing123
-                   console.log(card[i]);
-                   console.log(document.getElementsByClassName("modal")[i]);
                         modalDiv.style.display = "block";
                         if(card[i] = e.target){
                             document.getElementsByClassName("modal")[i].style.display = "block";
-                     } 
-
-                     
-                        // //++EE Updated CSS:
-                        // document.getElementsByClassName("modal")[0].style.color = "seagreen";
-                
-                        // modalText[0].style.color = "black";
-                        // modalText[1].style.color = "lightseagreen";
-                        // modalText[2].style.color = "black";
-                        // modalText[3].style.color = "black";
-                        // modalText[4].style.color = "mediumseagreen";
+                        } 
                  
                 });
-                }
-                                
-    
-} //end of function
 
+        //Future Prev/Next BTN:
+            document.getElementsByClassName("modal-prev btn")[i].addEventListener("click", (e) => {
+                //console.log("Phase 8 Solid");
+                    document.getElementsByClassName("modal")[i - 1].style.display = "block";
+                    document.getElementsByClassName("modal")[i].style.display = "none";
 
-/******** Remnants of Code:
-
-                    //++EE Updated CSS:
-                    document.getElementsByClassName("modal")[0].style.color = "seagreen";
-
-                    modalText[0].style.color = "black";
-                    modalText[1].style.color = "lightseagreen";
-                    modalText[2].style.color = "black";
-                    modalText[3].style.color = "black";
-                    modalText[4].style.color = "mediumseagreen";
-
-                    document.getElementsByClassName("modal-img")[0].style.border = "1px solid black";
-                    
-         
-
- //Future Prev/Next BTN:
-                document.querySelector("#modal-prev").addEventListener("click", (e) => {
-                                //console.log("Phase 7 Refactor");
-                             
-
-                     //Toggles Disable on PREV btn:
-                        if(people[i - 2] === undefined){
+                    //Toggles Disable on PREV btn:
+                        if(e.target = document.getElementsByClassName("modal-prev btn")[1]){
                             document.getElementsByClassName("modal-prev btn")[0].disabled = true;
                             document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "silver";
-                        } 
-    
-                        if(e.target === document.getElementsByClassName("modal-prev btn")[0]){
-                            document.getElementsByClassName("modal-next btn")[0].disabled = false;
-                            document.getElementsByClassName("modal-next btn")[0].style.backgroundColor = "black";
-                        } 
-                    
-            
+                        }
                     
                     }); //Event
 
-                document.querySelector("#modal-next").addEventListener("click", (e) => {
-                                //console.log("Phase 7 Refactoring");
-                                
+            document.getElementsByClassName("modal-next btn")[i].addEventListener("click", (e) => {
+                //console.log("Phase 8 Solid");
 
-                     //Toggles Disable on NEXT btn:
-                        if(people[i + 2] === undefined){
-                            document.getElementsByClassName("modal-next btn")[0].disabled = true;
-                            document.getElementsByClassName("modal-next btn")[0].style.backgroundColor = "silver";
+                    document.getElementsByClassName("modal")[i + 1].style.display = "block";
+                    document.getElementsByClassName("modal")[i].style.display = "none";
+
+                    //Toggles Disable on NEXT btn:
+                        if(e.target = document.getElementsByClassName("modal-next btn")[10]){
+                            document.getElementsByClassName("modal-next btn")[11].disabled = true;
+                            document.getElementsByClassName("modal-next btn")[11].style.backgroundColor = "silver";
                         } 
-
-                        if(e.target === document.getElementsByClassName("modal-next btn")[0]){
-                            document.getElementsByClassName("modal-prev btn")[0].disabled = false;
-                            document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "black";
-                        } 
-                    
-
+                
             }); //Event
-*******/
 
-
-/******
-     //Sidekick Function(s):
-
-function checkStatus(response){
-    if(response.ok){
-      return Promise.resolve(response);
-    } else {
-      return Promise.reject(new Error(`${response.statusText} occurred.`));
-    }
-  
-  }
-******/
+        }//end of for
+    
+} //end of function
 
 /******
-    For Recommended Refactoring:
+    For Recommended Refactoring from Peer Review:
 
     (async () => {
   const rawData = await fetch('https://randomuser.me/api/?results=12&lego');
