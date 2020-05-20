@@ -20,9 +20,9 @@ const people = [];
 
           //Create 12 "Awesome Inc." employee cards and HTML markup:
 function employeeGallery(employees){
-       
-        employees.map(employee => { 
-        
+
+        employees.map(employee => {
+
         let cardHTML = `
             <div class="card">
                 <div class="card-img-container">
@@ -37,11 +37,11 @@ function employeeGallery(employees){
             </div>
                 `;
                 gallery.innerHTML += cardHTML;
-            
+
         });
 
     //++EE Updated CSS:
-        for(let i = 0; i < 12; i++){ 
+        for(let i = 0; i < 12; i++){
             card[i].style.backgroundColor = "darkseagreen";
             card[i].style.border = "1px solid seagreen";
             document.getElementsByClassName("card-img")[i].style.border = "1px solid seagreen";
@@ -59,7 +59,7 @@ function employeeGallery(employees){
         </form>
     `;
         searchContainer.innerHTML = htmlMarkup;
-        
+
         //Employees are searchable by any information inside contact card:
             document.querySelector(".search-container input").addEventListener("keyup", (e) => {
                 const searchMatch = [];
@@ -74,15 +74,15 @@ function employeeGallery(employees){
                         searchMatch.push(contactInfo);
                         card[i].style.display = "inherit";
                         }
-                }    
+                }
 
                   //Meta Error Message:
                   if(searchMatch.length === 0){
-                    const secretTelegraph = 
+                    const secretTelegraph =
                         "Where in the world is Carmen Sandiego? 🌎 💃🏾 🔍";
                     window.alert(secretTelegraph);
-                }            
-                    
+                }
+
             });
 
     }
@@ -100,9 +100,9 @@ function galleryModal(employees){
             modalDiv.className = "modal-container";
             document.body.appendChild(modalDiv);
             employees.map(employee => {
-                
+
                 const birthday =  `${employee.dob.date}`;
-                //console.log(new Date(birthday).toUTCString()); //Testing123 Reference Point    
+                //console.log(new Date(birthday).toUTCString()); //Testing123 Reference Point
                 const year = new Date(birthday).getFullYear();
                 const month = new Date(birthday).getMonth() + 1;
                 const date = new Date(birthday).getDate();
@@ -120,12 +120,12 @@ function galleryModal(employees){
                 <p class="modal-text">📬 ${employee.location.street.number} ${employee.location.street.name}<br>${employee.location.city}, ${employee.location.state}<br>${employee.location.country}<br>${employee.location.postcode}</p>
                 <p class="modal-text">🎁 Birthday: ${month}/${date}/${year}</p>
             </div>
-            
+
                 <div class="modal-btn-container">
                     <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
                     <button type="button" id="modal-next" class="modal-next btn">Next</button>
                 </div>
-            
+
             `;
                 modalDiv.innerHTML += modalHTML;
                 modalDiv.style.display = "none";
@@ -133,47 +133,48 @@ function galleryModal(employees){
                 people.push(employees); //Creates separate Array for PREV/NEXT
 
             }); //end of map
-            
-            //employees.map(employee => console.log(employee.name.first)); //Testing123
-                
 
-       
+            //employees.map(employee => console.log(employee.name.first)); //Testing123
+
+
+
     //Looped Event Listeners:
         for(let i = 0; i < card.length; i ++){
             //Sets all to default display of "none"
                 document.getElementsByClassName("modal")[i].style.display = "none";
-          //Default Disable on PREV btn:
-            if(document.getElementsByClassName("modal-prev btn")[0].style.display = "block"){
-                document.getElementsByClassName("modal-prev btn")[0].disabled = true;
-                document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "silver";
-            } 
 
-        //Default Disable on NEXT btn:
-            if(document.getElementsByClassName("modal-next btn")[11].style.display = "block"){
-                document.getElementsByClassName("modal-next btn")[11].disabled = true;
-                document.getElementsByClassName("modal-next btn")[11].style.backgroundColor = "silver";
-            } 
                  //++EE Updated CSS:
                     document.getElementsByClassName("modal-img")[i].style.border = "1px solid black";
                     document.getElementsByClassName("modal-prev btn")[i].style.backgroundColor = "black";
                     document.getElementsByClassName("modal-next btn")[i].style.backgroundColor = "black";
                     document.getElementsByClassName("modal")[i].style.color = "seagreen";
 
+                    //Default Disable on PREV btn:
+                      //if(document.getElementsByClassName("modal-prev btn")[0].style.display = "block"){
+                          document.getElementsByClassName("modal-prev btn")[0].disabled = true;
+                          document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "silver";
+                      //}
 
+                    //Default Disable on NEXT btn:
+                    //  if(document.getElementsByClassName("modal-next btn")[11].style.display = "block"){
+                          document.getElementsByClassName("modal-next btn")[11].disabled = true;
+                          document.getElementsByClassName("modal-next btn")[11].style.backgroundColor = "silver";
+                    //}
+                    
         //X btn event listener:
             document.getElementsByClassName("modal-close-btn")[i].addEventListener("click", (e) => {
                     modalDiv.style.display = "none";
                     document.getElementsByClassName("modal")[i].style.display = "none";
                 });
-                
+
             //Card event listener:
                 Array.from(card)[i].addEventListener("click", (e) => {
                     console.log("💡"); //Testing123
                         modalDiv.style.display = "block";
                         if(card[i] = e.target){
                             document.getElementsByClassName("modal")[i].style.display = "block";
-                        } 
-                 
+                        }
+
                 });
 
         //Future Prev/Next BTN:
@@ -187,7 +188,7 @@ function galleryModal(employees){
                             document.getElementsByClassName("modal-prev btn")[0].disabled = true;
                             document.getElementsByClassName("modal-prev btn")[0].style.backgroundColor = "silver";
                         }
-                    
+
                     }); //Event
 
             document.getElementsByClassName("modal-next btn")[i].addEventListener("click", (e) => {
@@ -200,12 +201,12 @@ function galleryModal(employees){
                         if(e.target = document.getElementsByClassName("modal-next btn")[10]){
                             document.getElementsByClassName("modal-next btn")[11].disabled = true;
                             document.getElementsByClassName("modal-next btn")[11].style.backgroundColor = "silver";
-                        } 
-                
+                        }
+
             }); //Event
 
         }//end of for
-    
+
 } //end of function
 
 /******
